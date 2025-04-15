@@ -21,11 +21,9 @@ jobs:
     - name: Trigger Azure Load Test
       uses: azure/load-testing@v1
       with:
-        test-plan: ./jmeter-scripts/demo-api-test.jmx
+        test-plan: ./demo-api-test.jmx
         test-id: demo-api-test
         display-name: Demo API Load Test
         resource-group: testRG
         loadtest-resource: LTservice
         engine-instances: 1
-        secrets: |
-          DEMO_SECRET=https://pursuit-key1.vault.azure.net/secrets/client-secret
