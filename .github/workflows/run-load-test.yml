@@ -1,24 +1,31 @@
-name: Run Azure Load Test - Demo API
+name: Run Azure Load Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  run-loadtest:
+  loadtest:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-      - name: Trigger Azure Load Test
-        uses: azure/load-testing@v1
-        with:
-          loadTestConfigFile: ./loadtest-config.yaml
+    - name: Trigger Azure Load Test
+      uses: azure/load-testing@v1
+      with:
+        test-plan: ./jmeter-scripts/demo-api-test.jmx
+        test-id: demo-api-test
+        display-name: Demo API Load Test
+        resource-group: testRG
+        loadtest-resource: LTservice
+        engine-instances: 1
+        secrets: |
+          DEMO_SECRET=https://pursuit-key1.vault.azure.net/secrets/client-secret
