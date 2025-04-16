@@ -20,5 +20,5 @@ jobs:
       uses: azure/load-testing@v1
       with:
         loadtestConfigFile: ./loadtest-config.yaml
-        loadtestResource: LTservice
+        loadtestResource: LTService
         resourceGroup: testRG
