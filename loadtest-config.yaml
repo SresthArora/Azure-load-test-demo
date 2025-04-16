@@ -1,5 +1,11 @@
 testId: demo-api-test
 displayName: Demo API Load Test
 testPlan: ./demo-api-test.jmx
+description: 'Load test triggered from GitHub Actions'
 engineInstances: 1
-description: Load test triggered from GitHub Actions
+configurationFiles:
+- jmeter-plugins-functions-2.2.jar
+splitAllCSVs: True
+failureCriteria:
+- HTTP Request: p90(response_time_ms) > 1
+- percentage(error) >  10
