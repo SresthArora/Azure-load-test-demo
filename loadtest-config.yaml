@@ -1,0 +1,5 @@
+testId: demo-api-test
+displayName: Demo API Load Test
+testPlan: ./demo-api-test.jmx
+engineInstances: 1
+description: Load test triggered from GitHub Actions
