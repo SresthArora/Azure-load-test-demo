@@ -1,27 +1,24 @@
-name: Run Azure Load Test 
- 
-on: 
-  workflow_dispatch: 
- 
-jobs: 
-  loadtest: 
-    runs-on: ubuntu-latest 
- 
-    steps: 
-    - name: Checkout repository 
-      uses: actions/checkout@v3 
- 
-    - name: Azure Login 
-      uses: azure/login@v1 
-      with: 
-        creds: ${{ secrets.AZURE_CREDENTIALS }} 
- 
-    - name: Trigger Azure Load Test 
-      uses: azure/load-testing@v1 
-      with: 
-        test-plan: ./demo-api-test.jmx 
-        test-id: demo-api-test 
-        display-name: Demo API Load Test 
-        resource-group: testRG 
-        loadtest-resource: LTservice 
-        engine-instances: 1 
+name: Run Azure Load Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  loadtest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Trigger Azure Load Test
+      uses: azure/load-testing@v1
+      with:
+        loadtestConfigFile: ./loadtest-config.yaml
+        loadtestResource: LTservice
+        resourceGroup: testRG
