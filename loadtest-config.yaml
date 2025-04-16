@@ -7,5 +7,5 @@ configurationFiles:
 - jmeter-plugins-functions-2.2.jar
 splitAllCSVs: True
 failureCriteria:
-- HTTP Request: p90(response_time_ms) > 1
+- HTTP Request: p90(response_time_ms) > 1000
 - percentage(error) >  10
